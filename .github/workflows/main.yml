@@ -35,11 +35,17 @@ jobs:
         run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend:latest
       - name: Delete old container
         run: sudo docker rm -f nodejs-app-container
+      - name: stop running backend docker container
+        run: sudo docker stop ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
+      - name: Delete old container
+        run: sudo docker rm -f ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
       - name: Run docker container
         run: sudo docker run -d -p 3001:3001 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
       - name: Pull frontend image from docker hub
         run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend:latest
+      - name: stop running backend docker container
+        run: sudo docker stop ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
       - name: Delete old container
-        run: sudo docker rm -f nodejs-app-container
+        run: sudo docker rm -f ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
       - name: Run docker container
         run: sudo docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
