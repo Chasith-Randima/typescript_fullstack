@@ -28,7 +28,7 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend .
           docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
   deploy:
-    needs: build
+    needs: build-and-push-images
     runs-on: [aws-ec2]
     steps:
       - name: Pull backend image from docker hub
