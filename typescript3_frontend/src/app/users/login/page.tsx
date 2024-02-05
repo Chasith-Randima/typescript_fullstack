@@ -111,7 +111,7 @@ const Login = () => {
         setAlert({
           ...alert,
           loading: false,
-          message: "check your credentials...",
+          message: "check your credentials..",
           error: true,
           success: false,
         });
