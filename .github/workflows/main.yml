@@ -29,17 +29,17 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
   deploy:
     needs: build-and-push-images
-    runs-on: [aws-ec2]
+    runs-on: [aws-ec2,self-hosted]
     steps:
       - name: Pull backend image from docker hub
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend:latest
+        run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend:latest
       - name: Delete old container
-        run: docker rm -f nodejs-app-container
+        run: sudo docker rm -f nodejs-app-container
       - name: Run docker container
-        run: docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
+        run: sudo docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
       - name: Pull frontend image from docker hub
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend:latest
+        run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend:latest
       - name: Delete old container
-        run: docker rm -f nodejs-app-container
+        run: sudo docker rm -f nodejs-app-container
       - name: Run docker container
-        run: docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
+        run: sudo docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
