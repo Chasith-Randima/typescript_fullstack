@@ -2,7 +2,8 @@ import fetch from "isomorphic-fetch";
 import axios from "axios";
 import queryString from "query-string";
 
-let API = process.env.NEXT_PUBLIC_API_DEVELOPMENT;
+let API = "http://44.204.150.148:3001/api/v1"
+// let API = process.env.NEXT_PUBLIC_API_DEVELOPMENT;
 
 // if (process.env.NEXT_PUBLIC_PRODUCTION && process.env.NEXT_PUBLIC_PRODUCTION.toLowerCase() === 'true') {
 //     API = process.env.NEXT_PUBLIC_API_PRODUCTION;
