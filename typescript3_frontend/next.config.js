@@ -17,12 +17,16 @@ const nextConfig = {
         },
         {
           protocol: "http",
-          hostname: "127.0.0.1",
+          hostname: "44.204.150.148",
         },
-        {
-          protocol: "http",
-          hostname: "http://44.204.150.148/",
-        },
+        // {
+        //   protocol: "http",
+        //   hostname: "127.0.0.1",
+        // },
+        // {
+        //   protocol: "http",
+        //   hostname: "http://44.204.150.148/",
+        // },
       ],
     },
   };
