@@ -17,13 +17,13 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push backend image
-        working-directory: backend
+        working-directory: typescript_3
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend .
           docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
 
       - name: Build and push frontend image
-        working-directory: frontend
+        working-directory: typescript3_frontend
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend .
           docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
