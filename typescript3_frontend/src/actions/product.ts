@@ -4,9 +4,9 @@ import queryString from "query-string";
 
 let API = process.env.NEXT_PUBLIC_API_DEVELOPMENT;
 
-if (process.env.NEXT_PUBLIC_PRODUCTION && process.env.NEXT_PUBLIC_PRODUCTION.toLowerCase() === 'true') {
-    API = process.env.NEXT_PUBLIC_API_PRODUCTION;
-  }
+// if (process.env.NEXT_PUBLIC_PRODUCTION && process.env.NEXT_PUBLIC_PRODUCTION.toLowerCase() === 'true') {
+//     API = process.env.NEXT_PUBLIC_API_PRODUCTION;
+//   }
 
 export const createProduct = async (data:any, token:string) => {
   console.log(token);
