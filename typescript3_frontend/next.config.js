@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  // exportPathMap: function () {
+  //   return {
+  //     '/': { page: '/' },
+  //     // Add other routes as needed
+  //   }
+  // },
     images: {
       remotePatterns: [
         {

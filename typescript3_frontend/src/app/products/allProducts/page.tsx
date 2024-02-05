@@ -328,7 +328,7 @@ const AllProducts = () => {
                           <option value="">Select Brand</option>
                           {brands.map((branN, index) => {
                             return (
-                              <option value={branN} className="capitalize">
+                              <option value={branN} className="capitalize" key={index}>
                                 {branN}
                               </option>
                             );

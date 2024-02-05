@@ -16,7 +16,7 @@ const Footer = () => (
         />
         <p className="text-base text-gray-700">
           Laptop.LK 2024 <br />
-          All Rights Reserved &copy;
+          All Rights Reserved AND THIS IS TO CHECK THE BINDING&copy;
         </p>
       </div>
 

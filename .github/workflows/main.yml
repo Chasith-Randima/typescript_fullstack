@@ -1,0 +1,45 @@
+name: CI/CD Pipeline for Fullstack Courswork
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push backend image
+        working-directory: backend
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend .
+          docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
+
+      - name: Build and push frontend image
+        working-directory: frontend
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend .
+          docker push ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull backend image from docker hub
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend:latest
+      - name: Delete old container
+        run: docker rm -f nodejs-app-container
+      - name: Run docker container
+        run: docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_backend
+      - name: Pull frontend image from docker hub
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend:latest
+      - name: Delete old container
+        run: docker rm -f nodejs-app-container
+      - name: Run docker container
+        run: docker run -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/typescript_ecommerse_frontend

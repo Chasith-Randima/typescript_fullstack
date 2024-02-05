@@ -204,7 +204,7 @@ const Login = () => {
                     </button>
                   </div>
                   <div>
-                    <span>Don't have an Account ?</span>
+                    <span>Dont have an Account ?</span>
                     <Link
                       href={"/users/signup"}
                       className="bg-gray-200 rounded-xl p-2 hover:bg-gray-400 hover:text-white"

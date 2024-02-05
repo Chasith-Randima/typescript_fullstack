@@ -348,8 +348,8 @@ export default function Home() {
         {allData && allData.length > 0 ? (
           <section>
             <div className="home__cars-wrapper">
-              {allData?.map((product:any) => (
-                <ProductCard product={product} />
+              {allData?.map((product:any,index:any) => (
+                <ProductCard product={product} key={index} />
               ))}
             </div>
 

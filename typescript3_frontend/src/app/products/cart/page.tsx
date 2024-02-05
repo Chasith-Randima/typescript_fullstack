@@ -2,8 +2,7 @@
 import { ShopContext } from "@/context/show-context";
 import { useContext, useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import Modal from "@/components/Modal";
+
 import { useRouter } from "next/navigation";
 
 const Cart = () => {
@@ -112,7 +111,7 @@ if (process.env.NEXT_PUBLIC_PRODUCTION && process.env.NEXT_PUBLIC_PRODUCTION.toL
                 </tr>
               </thead>
               <tbody>
-                {Object.values(cartItems).map((item:any) => {
+                {Object.values(cartItems).map((item:any,index:any) => {
                   console.log(
                     item,
                     item.itemId,
@@ -121,7 +120,7 @@ if (process.env.NEXT_PUBLIC_PRODUCTION && process.env.NEXT_PUBLIC_PRODUCTION.toL
                   );
 
                   return (
-                    <tr>
+                    <tr key={index}>
                       <td className="hidden pb-4 md:table-cell">
                         <a href="#">
                           <img

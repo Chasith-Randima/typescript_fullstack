@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  backend:
+    container_name: "typescript-ecommerse-backend-container"
+    build:
+      context: ./typescript_3
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - typescript-ecommerse
+    volumes:
+      # - backend-data:/app/backend/data
+      - ./typescript_3/src:/app/backend/src
+  
+  frontend:
+    container_name: typescript-ecommerse-frontend-container
+    build:
+      context: ./typescript3_frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - typescript-ecommerse
+    volumes:
+      - ./typescript3_frontend/src:/app/frontend/src
+    depends_on:
+      - backend
+networks:
+  typescript-ecommerse:
+volumes:
+  typescript-ecommerse:
+
+
