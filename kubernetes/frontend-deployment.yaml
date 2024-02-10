@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: randimasilva/typescript_ecommerse_frontend
+        env:
+          - name: NEXT_PUBLIC_APP_NAME
+            value: LAP.LK
+          - name: NEXT_PUBLIC_FRONTEND_DOMAIN
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_API_DEVELOPMENT
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_API_PRODUCTION
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_PRODUCTION
+            value: "false"
+          - name: NEXT_PUBLIC_STRIPE
+            value: pk_test_51H1PjSIzYcTJzt02z5GaR7ntXS7SzKPSg1qSNRkeP55DoPFWyHwQ5MhuzBer27U1YSt1poEhuSHTntS9lvf6em3400mftYOTgG
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+

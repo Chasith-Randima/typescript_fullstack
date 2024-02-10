@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: randimasilva/typescript_ecommerse_backend
+        env:
+          - name: NODE_ENV
+            value: "development"
+          - name: PORT
+            value: "3001"
+          - name: PORT_TEST
+            value: "3002"
+          - name: FRONTEND_DOMAIN_DEVELOPMENT
+            value: http://127.0.0.1:3000
+          - name: DATABASE
+            value: mongodb+srv://test_dev:pNGK1Uc9EMjA9IAR@cluster0.3mhko.mongodb.net/ecommerse_typesecript?retryWrites=true&w=majority
+          - name: JWT_SECRET
+            value: thequickbrownfoxjumpoverthelazydoggieshead
+          - name: JWT_EXPIRES_IN
+            value: 90d
+          - name: JWT_COOCKIE_EXPIRES_IN
+            value: "90"
+          - name: STRIPE_SECRET
+            value: sk_test_51H1PjSIzYcTJzt02vJLBxbRiUzHElFb8Y32CtNKZ5qXwjFr4PwNoikOGwQwSuyXXJyoCypx7DxcXlKNcucF89wmc00Sgjtl9s8
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+

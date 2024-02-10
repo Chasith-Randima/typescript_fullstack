@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: randimasilva/typescript_ecommerse_backend
+        env:
+          - name: NODE_ENV
+            value: "development"
+          - name: PORT
+            value: "3001"
+          - name: PORT_TEST
+            value: "3002"
+          - name: FRONTEND_DOMAIN_DEVELOPMENT
+            value: http://127.0.0.1:3000
+          - name: DATABASE
+            value: mongodb+srv://test_dev:pNGK1Uc9EMjA9IAR@cluster0.3mhko.mongodb.net/ecommerse_typesecript?retryWrites=true&w=majority
+          - name: JWT_SECRET
+            value: thequickbrownfoxjumpoverthelazydoggieshead
+          - name: JWT_EXPIRES_IN
+            value: 90d
+          - name: JWT_COOCKIE_EXPIRES_IN
+            value: "90"
+          - name: STRIPE_SECRET
+            value: sk_test_51H1PjSIzYcTJzt02vJLBxbRiUzHElFb8Y32CtNKZ5qXwjFr4PwNoikOGwQwSuyXXJyoCypx7DxcXlKNcucF89wmc00Sgjtl9s8
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: randimasilva/typescript_ecommerse_frontend
+        env:
+          - name: NEXT_PUBLIC_APP_NAME
+            value: LAP.LK
+          - name: NEXT_PUBLIC_FRONTEND_DOMAIN
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_API_DEVELOPMENT
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_API_PRODUCTION
+            value: "http://127.0.0.1:10607/api/v1"
+          - name: NEXT_PUBLIC_PRODUCTION
+            value: "false"
+          - name: NEXT_PUBLIC_STRIPE
+            value: pk_test_51H1PjSIzYcTJzt02z5GaR7ntXS7SzKPSg1qSNRkeP55DoPFWyHwQ5MhuzBer27U1YSt1poEhuSHTntS9lvf6em3400mftYOTgG
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+
